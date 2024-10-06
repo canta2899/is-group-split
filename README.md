@@ -10,3 +10,14 @@ A preview of the provided file is then shown and it is possible to execute the p
 - The code that handles the actual task (partitioning the matrix) is located at `src/utils/partitioning`
 - The code that handles the UI is divided in components located at `src/components`
 - The app entry point is `src/main.tsx`
+
+## Usage
+
+The app is deployed to GitHub Pages and can be accessed [here](https://canta2899.github.io/is-group-split/).
+
+Otherwise, to run from your local machine you can:
+
+- Clone the repository
+- Install packages `npm install`
+- Execute `npm run build`
+- A `dist` directory will be created containing the app bundle, that can be deployed like any static asset

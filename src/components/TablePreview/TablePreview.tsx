@@ -27,7 +27,6 @@ const TablePreview: React.FC<TablePreviewProps> = ({
           {data.map((row, rowIndex) => (
             <tr key={rowIndex}>
               {row.map((cell, colIndex) => {
-                // Highlight the cell if both the rowIndex and colIndex are in team1 or team2
                 const bgColor = getHighlightingClass(
                   team1,
                   team2,
