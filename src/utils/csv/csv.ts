@@ -14,22 +14,20 @@ export const parseCSV = (
   delimiter: string,
   lineSeparator: string
 ): ParsedCSVResult => {
-  // Step 1: Split CSV text into lines
   const lines = splitLines(csvText, lineSeparator);
   if (!lines.length) {
     return errorResult('Empty CSV file.');
   }
 
-  // Step 2: Split lines into raw rows
   const rawRows = splitRows(lines, delimiter);
   if (!rawRows.length) {
     return errorResult('Invalid CSV format.');
   }
 
-  // Step 3: Separate headers (if applicable)
+  // Separate headers (if applicable)
   const { headers, dataRows } = processHeader(rawRows, hasHeader);
 
-  // Step 4: Validate and convert the remaining data to numbers
+  // Validate
   try {
     const data = parseDataRows(dataRows);
     

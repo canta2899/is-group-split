@@ -1,6 +1,6 @@
 export interface UploadDialogProps {
   onUpload: OnUploadCallback;
-  errorMessage?: string | null; // New prop for error message
+  errorMessage?: string | null;
 }
 
 export type OnUploadCallback = (

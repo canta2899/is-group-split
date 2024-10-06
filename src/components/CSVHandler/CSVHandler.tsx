@@ -3,7 +3,7 @@ import UploadDialog from "../UploadDialog/UploadDialog";
 import TablePreview from "../TablePreview/TablePreview";
 import { useCsvUploader } from "./CSVUploader.hook";
 
-const CSVUploader = () => {
+const CSVHandler = () => {
   const utils = useCsvUploader();
 
   return (
@@ -87,4 +87,4 @@ const CSVUploader = () => {
   );
 };
 
-export default CSVUploader;
+export default CSVHandler;

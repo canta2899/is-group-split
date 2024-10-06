@@ -1,10 +1,10 @@
 import React from "react";
-import CSVUploader from "./CSVUploader/CSVUploader";
+import CSVHandler from "./CSVHandler/CSVHandler";
 
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <CSVUploader />
+      <CSVHandler />
     </div>
   );
 };

@@ -6,8 +6,8 @@ export const getHighlightingClass = (
   rowIndex: number,
   colIndex: number
 ) => {
+  // Highlight the cell if both the rowIndex and colIndex are in team1 or team2
   const highlightTeam1 = team1.has(rowIndex) && team1.has(colIndex);
-
   const highlightTeam2 =
     team2.has(rowIndex) && team2.has(rowIndex) && team2.has(colIndex);
 

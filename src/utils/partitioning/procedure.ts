@@ -119,11 +119,11 @@ const calculateRatingsBruteForce = (matrix: number[][]): PartitionResult => {
   let chosenPartition: number[][] = [[], []];
   const totalSubsets = 1 << matrix.length; // 2^N subsets
 
-  for (let mask = 1; mask < totalSubsets; mask++) {
+  for (let mask = 1; mask < totalSubsets; mask++) { // each subset
     const team1 = [];
     const team2 = [];
 
-    // Fill team1 based on the current mask
+    // Fill teams based on the current mask
     for (let i = 0; i < N; i++) {
       if (mask & (1 << i)) {
         team1.push(i);
@@ -145,8 +145,8 @@ const calculateRatingsBruteForce = (matrix: number[][]): PartitionResult => {
   }
 
   return {
-      team1: chosenPartition[0],
-      team2: chosenPartition[1]
+    team1: chosenPartition[0],
+    team2: chosenPartition[1]
   }
 }
 

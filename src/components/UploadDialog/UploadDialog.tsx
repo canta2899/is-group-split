@@ -22,7 +22,7 @@ const UploadDialog: React.FC<UploadDialogProps> = ({
 
       {errorMessage && (
         <div className="mb-4 p-4 bg-red-100 text-red-800 border border-red-400 rounded">
-          {errorMessage} {/* Display error message */}
+          {errorMessage}
         </div>
       )}
 
