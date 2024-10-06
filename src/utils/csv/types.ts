@@ -6,5 +6,3 @@ export interface ParsedCSVResult {
   error?: string;
 }
   
-export type CSVHeader = string[] | undefined;
-export type CSVContent = number[][];

@@ -1,4 +1,4 @@
-import { CSVContent, CSVHeader, ParsedCSVResult } from "./types";
+import { ParsedCSVResult } from "./types";
 
 /**
  * Main function to parse CSV text and return a structured result.
@@ -14,12 +14,15 @@ export const parseCSV = (
   delimiter: string,
   lineSeparator: string
 ): ParsedCSVResult => {
+
   const lines = splitLines(csvText, lineSeparator);
+
   if (!lines.length) {
     return errorResult('Empty CSV file.');
   }
 
   const rawRows = splitRows(lines, delimiter);
+
   if (!rawRows.length) {
     return errorResult('Invalid CSV format.');
   }
@@ -27,11 +30,10 @@ export const parseCSV = (
   // Separate headers (if applicable)
   const { headers, dataRows } = processHeader(rawRows, hasHeader);
 
-  // Validate
+  // Validation
   try {
     const data = parseDataRows(dataRows);
     
-    // Step 5: Check for square matrix
     if (!isSquareMatrix(data)) {
       return errorResult('The CSV does not represent a square matrix. Maybe you need to enable/disable headers?');
     }
@@ -116,7 +118,7 @@ const isSquareMatrix = (data: number[][]): boolean => {
  * @param data - The parsed data as a 2D array of numbers.
  * @returns A ParsedCSVResult object containing the headers, data, row count, and column count.
  */
-const createParsedResult = (headers: CSVHeader, data: CSVContent): ParsedCSVResult => {
+const createParsedResult = (headers: string[] | undefined, data: number[][]): ParsedCSVResult => {
   const rowCount = data.length;
   const columnCount = data[0]?.length || 0;
 
