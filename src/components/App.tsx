@@ -1,5 +1,5 @@
 import React from "react";
-import CSVUploader from "./components/CSVUploader/CSVUploader";
+import CSVUploader from "./CSVUploader/CSVUploader";
 
 const App: React.FC = () => {
   return (
