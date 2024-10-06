@@ -21,3 +21,9 @@ Otherwise, to run from your local machine you can:
 - Install packages `npm install`
 - Execute `npm run build`
 - A `dist` directory will be created containing the app bundle, that can be deployed like any static asset
+
+## How it looks
+
+![Page 1](./assets/page1.png)
+
+![Page 2](./assets/page2.png)
