@@ -1,10 +1,10 @@
 import { FaRegArrowAltCircleLeft, FaRegChartBar } from "react-icons/fa"; // Importing icons
 import UploadDialog from "../UploadDialog/UploadDialog";
 import TablePreview from "../TablePreview/TablePreview";
-import { useCsvUploader } from "./CSVUploader.hook";
+import { useCsvHandler } from "./CSVHandler.hook";
 
 const CSVHandler = () => {
-  const utils = useCsvUploader();
+  const utils = useCsvHandler();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">

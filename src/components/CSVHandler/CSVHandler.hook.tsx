@@ -2,7 +2,7 @@ import { parseCSV, ParsedCSVResult } from "../../utils/csv";
 import Partition, { PartitionResult } from "../../utils/partitioning";
 import { useCallback, useState } from "react";
 
-export const useCsvUploader = () => {
+export const useCsvHandler = () => {
   const [csvResult, setCsvResult] = useState<ParsedCSVResult | null>(null);
   const [showModal, setShowModal] = useState(true);
   const [isLoadingResult, setIsLoadingResult] = useState(false);
