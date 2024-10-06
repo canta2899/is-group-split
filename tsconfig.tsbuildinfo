@@ -1,1 +1,0 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/csvuploader.tsx","./src/components/tablepreview.tsx","./src/components/uploaddialog.tsx","./src/utils/csv/csv.ts","./src/utils/csv/index.ts","./src/utils/csv/types.ts","./src/utils/partitioning/index.ts","./src/utils/partitioning/procedure.ts","./src/utils/partitioning/types.ts"],"version":"5.6.2"}
