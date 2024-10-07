@@ -21,7 +21,6 @@ export const useUploadDialog = (onUpload: OnUploadCallback) => {
 
   return {
     file,
-    setFile,
     hasHeader,
     setHasHeader,
     delimiter,

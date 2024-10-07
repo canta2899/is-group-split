@@ -6,6 +6,7 @@ export const useCsvHandler = () => {
   const [csvResult, setCsvResult] = useState<ParsedCSVResult | null>(null);
   const [showModal, setShowModal] = useState(true);
   const [isLoadingResult, setIsLoadingResult] = useState(false);
+  const [isBigMatrix, setIsBixMatrix] = useState(false);
   const [partitionResult, setPartitionResult] =
     useState<PartitionResult | null>(null);
 
@@ -26,6 +27,7 @@ export const useCsvHandler = () => {
 
         setCsvResult(result);
         setShowModal(result.error !== undefined);
+        setIsBixMatrix(result.data.length > 23);
       };
       reader.readAsText(file);
     },
@@ -44,27 +46,24 @@ export const useCsvHandler = () => {
   /**
    *  Partitions CSV data in groups
    */
-  const partitionGroups = useCallback(() => {
-    setIsLoadingResult(true);
+  const partitionGroups = useCallback(async () => {
     if (csvResult) {
+      setIsLoadingResult(true);
       const { data } = csvResult;
-      const result = Partition.calculateRatings(data);
+      const result = await Partition.calculateRatings(data);
+      setIsLoadingResult(false);
       setPartitionResult(result);
     }
-    setIsLoadingResult(false);
   }, [csvResult, setPartitionResult]);
 
   return {
     csvResult,
-    setCsvResult,
     showModal,
-    setShowModal,
     isLoadingResult,
-    setIsLoadingResult,
     partitionResult,
-    setPartitionResult,
     partitionGroups,
     handleGoBack,
     handleUpload,
+    isBigMatrix,
   };
 };

@@ -1,5 +1,8 @@
 import { PartitionResult } from "./types";
 
+let SEED = Math.random();
+const setSeed = (val: number) => SEED = val;
+
 /**
  * Calculate the average rating for a given partition in the rating matrix.
  * @param {number[]} partition - The indices of members in the partition.
@@ -25,16 +28,26 @@ const calculateAverage = (partition: number[], matrix: number[][]): number => {
   return memberCount > 0 ? totalRating / memberCount : 0;
 }
 
-/**
- * Swap random members between two teams.
- * @param {number[]} t1 - The first team.
- * @param {number[]} t2 - The second team.
- */
+// Seeded random number generator function
+const seededRandom = () => {
+  const x = Math.sin(SEED) * 10000;
+  SEED += 31;
+  return x - Math.floor(x);
+};
+
+// /**
+//  * Swap random members between two teams.
+//  * @param {number[]} t1 - The first team.
+//  * @param {number[]} t2 - The second team.
+//  */
 const swapMembers = (t1: number[], t2: number[]): void => {
-  const randomIndex1 = Math.floor(Math.random() * t1.length);
-  const randomIndex2 = Math.floor(Math.random() * t2.length);
+  // Generate two random indexes using the seeded random generator
+  const randomIndex1 = Math.floor(seededRandom() * t1.length);
+  const randomIndex2 = Math.floor(seededRandom() * t2.length);  // Use a slightly modified seed for second index
+  
+  // Swap the members at the chosen random indices
   [t1[randomIndex1], t2[randomIndex2]] = [t2[randomIndex2], t1[randomIndex1]];
-}
+};
 
 /**
  * Generate an initial partition by alternating members.
@@ -62,13 +75,15 @@ const getInitialPartition = (matrixSize: number): {team1: number[]; team2: numbe
  * @returns {PartitionResult} An object containing the best median and partition.
  */
 const calculateRatingsHeuristic = (matrix: number[][]): PartitionResult => {
+  setSeed(42);
+
   const N = matrix.length;
   let bestMedian = -Infinity;
   let chosenPartition: number[][] = [[], []];
 
   const { team1, team2 } = getInitialPartition(N);
 
-  const iterSize = 200;
+  const iterSize = 5000;
 
   for (let iter = 0; iter < iterSize; iter++) {
     const avg1 = calculateAverage(team1, matrix);
@@ -155,11 +170,14 @@ const calculateRatingsBruteForce = (matrix: number[][]): PartitionResult => {
  * @param {number[][]} matrix - The rating matrix.
  * @returns {PartitionResult} An object containing the best median and partition.
  */
-const calculateRatings = (matrix: number[][]): PartitionResult => {
-  if (matrix.length <= 20) 
-    return calculateRatingsBruteForce(matrix);
+const calculateRatings = (matrix: number[][]): Promise<PartitionResult> => {
+  return new Promise((resolve) => {
+    if (matrix.length <= 23) 
+      return resolve(calculateRatingsBruteForce(matrix));
 
-  return calculateRatingsHeuristic(matrix);
+    return resolve(calculateRatingsHeuristic(matrix));
+
+  })
 }
 
 export default { calculateRatings };

@@ -20,11 +20,10 @@ const CSVHandler = () => {
       )}{" "}
       {!utils.showModal && utils.csvResult && (
         <div className="w-full flex flex-col">
-          <div className="w-full bg-white shadow-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex flex-col">
-              <div className="text-2xl text-green-600">Results</div>
+          <div className="w-full bg-white shadow-lg p-6 flex flex-col md:flex-row justify-between gap-4">
+            <div className="flex flex-col items-start text-xl">
               <button
-                className="mt-2 flex items-center text-gray-600 hover:text-gray-900 transition duration-200"
+                className="mt-2 flex gap-2 items-center text-gray-600 hover:text-gray-900 transition duration-200"
                 onClick={utils.handleGoBack}
               >
                 <FaRegArrowAltCircleLeft className="mr-1" />
@@ -32,18 +31,26 @@ const CSVHandler = () => {
               </button>
             </div>
 
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col">
               {!utils.partitionResult ? (
-                <div className="text-center md:text-start">
-                  <div className="font-semibold">
+                <div>
+                  <div className="font-semibold text-center">
                     Number of members:{" "}
                     <span className="font-normal">
                       {utils.csvResult.rowCount}
                     </span>
                   </div>
-                  <p className="text-gray-500">
+                  <div className="text-gray-600 text-center">
                     Run the procedure to get result
-                  </p>
+                  </div>
+
+                  {utils.isBigMatrix && (
+                    <div className="text-sm text-center mt-3 md:max-w-sm text-gray-500 font-light">
+                      The matrix size is big and cannot computed using the
+                      standard procedure. A poorly tested heuristic will be used
+                      and probably the result will be incorrect.
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div>
@@ -56,7 +63,7 @@ const CSVHandler = () => {
                   </p>
                 </div>
               )}
-              <div className="mx-auto md:mx-0">
+              <div className="mx-auto">
                 <button
                   onClick={utils.partitionGroups}
                   className="mt-4 p-2 bg-blue-600 text-white rounded transition duration-200 hover:bg-blue-700 flex items-center"
