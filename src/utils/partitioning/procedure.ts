@@ -12,20 +12,18 @@ const setSeed = (val: number) => SEED = val;
 const calculateAverage = (partition: number[], matrix: number[][]): number => {
   if (partition.length === 0) return 0;
   let totalRating = 0;
-  let memberCount = 0;
 
   for (let i = 0; i < matrix.length; i++) {
     if (partition.includes(i)) {
       for (let j = 0; j < matrix.length; j++) {
         if (partition.includes(j)) {
-        totalRating += matrix[i][j];
-        memberCount++;
+          totalRating += matrix[i][j];
         }
       }
     }
   }
 
-  return memberCount > 0 ? totalRating / memberCount : 0;
+  return totalRating / partition.length;
 }
 
 // Seeded random number generator function
@@ -44,7 +42,7 @@ const swapMembers = (t1: number[], t2: number[]): void => {
   // Generate two random indexes using the seeded random generator
   const randomIndex1 = Math.floor(seededRandom() * t1.length);
   const randomIndex2 = Math.floor(seededRandom() * t2.length);  // Use a slightly modified seed for second index
-  
+
   // Swap the members at the chosen random indices
   [t1[randomIndex1], t2[randomIndex2]] = [t2[randomIndex2], t1[randomIndex1]];
 };
@@ -54,7 +52,7 @@ const swapMembers = (t1: number[], t2: number[]): void => {
  * @param {number} matrixSize - The size of the matrix (number of members).
  * @returns {{ team1: number[], team2: number[] }} An object containing the initial teams.
  */
-const getInitialPartition = (matrixSize: number): {team1: number[]; team2: number[]} => {
+const getInitialPartition = (matrixSize: number): { team1: number[]; team2: number[] } => {
   const team1: number[] = [];
   const team2: number[] = [];
   for (let i = 0; i < matrixSize; i++) {
@@ -65,7 +63,7 @@ const getInitialPartition = (matrixSize: number): {team1: number[]; team2: numbe
     }
   }
 
-  return { team1, team2}
+  return { team1, team2 }
 }
 
 /**
@@ -100,8 +98,8 @@ const calculateRatingsHeuristic = (matrix: number[][]): PartitionResult => {
   }
 
   return {
-      team1: chosenPartition[0],
-      team2: chosenPartition[1]
+    team1: chosenPartition[0],
+    team2: chosenPartition[1]
   };
 }
 
@@ -172,7 +170,7 @@ const calculateRatingsBruteForce = (matrix: number[][]): PartitionResult => {
  */
 const calculateRatings = (matrix: number[][]): Promise<PartitionResult> => {
   return new Promise((resolve) => {
-    if (matrix.length <= 23) 
+    if (matrix.length <= 23)
       return resolve(calculateRatingsBruteForce(matrix));
 
     return resolve(calculateRatingsHeuristic(matrix));
